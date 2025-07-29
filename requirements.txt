@@ -1,0 +1,36 @@
+# 🚀 API DE PRODUÇÃO - DOCTR OCR ASSÍNCRONO
+# Dependências otimizadas para produção assíncrona
+
+# FastAPI e servidor
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+
+# docTR - OCR principal (versão estável)
+python-doctr==0.10.0
+
+# Dependências do docTR (versões compatíveis)
+torch==2.1.1
+torchvision==0.16.1
+opencv-python==4.6.0.66
+numpy==1.24.3
+Pillow==10.1.0
+scipy==1.13.1
+
+# Cache e Queue assíncronos
+redis==5.0.1
+celery==5.3.4
+aiofiles==23.2.1
+
+# Processamento assíncrono
+asyncio-throttle==1.0.2
+aiohttp==3.9.1
+
+# Utilitários
+requests==2.31.0
+python-dotenv==1.1.1
+
+# Dependências extras do docTR
+rapidfuzz==3.13.0
+shapely==1.8.5.post1
+langdetect==1.0.9 

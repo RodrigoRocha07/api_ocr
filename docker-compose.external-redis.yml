@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # API OCR (sem Redis local)
+  api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: ocr-api
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_URL=redis://seu-redis-externo:6379  # Redis externo
+      - PYTHONPATH=/app
+      - PYTHONUNBUFFERED=1
+      - DOCTR_CACHE_DIR=/app/.doctr_cache
+    volumes:
+      - ./app:/app/app
+      - doctr_cache:/app/.doctr_cache
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/ocr/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - ocr-network
+
+volumes:
+  doctr_cache:
+
+networks:
+  ocr-network:
+    driver: bridge 
